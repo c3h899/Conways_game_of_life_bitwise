@@ -18,7 +18,7 @@
 /* Debugging */
 
 //#include "bitfield.hpp"
-//#define NOT_CRAP
+#define NOT_CRAP
 
 #ifdef NOT_CRAP
 
