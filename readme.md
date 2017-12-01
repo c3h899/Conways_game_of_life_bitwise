@@ -4,14 +4,14 @@ An exercise in bitwise logic and precursor the implementation in discrete hardwa
 ## Considerations of parallelism
 At its core Conway's Game of Life is a simple adder with some conditional behavior. It is believed (unverified) that performance gains from a software implementation of the adder and combinatorial logic can be seen given sufficient execution width.
 
-Further the Game of Life is an iterative state machine depending on only present state to calculate the (next) future state. This allows for entire tiles to be evaluated in parallel assuming that accesses from neighboring elements are guaranteed constant results over the course of the computations of state. This is reflected in class' maintaining copies of the data to be requested by neighboring tiles and the separation of the computation function 'evaluate_cell()' and data setting 'populate_shares()'.
+Further, the Game of Life is an iterative state machine depending on only present state to calculate the (next) future state. This allows for entire tiles to be evaluated in parallel assuming that accesses from neighboring elements are guaranteed constant results over the course of the computations of state. This is reflected in class' maintaining copies of the data to be requested by neighboring tiles and the separation of the computation function 'evaluate_cell()' and data setting 'populate_shares()'.
 
 Simple parallelization would:
-1 evaluate all the cells
-2 synchronize
-3 update all shares
-4 synchronize
-5 repeat
+1. Evaluate all the cells
+2. Synchronize
+3. Update all shares
+4. Synchronize
+5. Repeat
 
 The shares are accessed by neighboring tiles to provide the necessary edge values for proper computation. The principle bitfield is modified during cell evaluation and is not guaranteed to be constant during the course of it's computation.
 
